@@ -1,2 +1,1 @@
-# garply
-garply toy module
+The garply module
