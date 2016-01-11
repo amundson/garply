@@ -2,6 +2,7 @@
 
 #include "garply/garply.h"
 
+namespace {
 bool
 test_construct()
 {
@@ -14,6 +15,7 @@ test_garplinator()
 {
     Garply garply;
     return (garply.garplinator() == garply.get_version());
+}
 }
 
 int

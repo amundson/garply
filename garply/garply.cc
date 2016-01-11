@@ -1,9 +1,6 @@
 #include <iostream>
 #include "garply.h"
-
-namespace {
 #include "garply_version.h"
-}
 
 const int Garply::version_major = garply_version_major;
 const int Garply::version_minor = garply_version_minor;
