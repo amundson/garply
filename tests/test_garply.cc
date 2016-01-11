@@ -27,4 +27,6 @@ main(int argc, char* argv[])
     if (!test_garplinator()) {
         throw std::runtime_error("test_garplinator failed");
     }
+
+    return 0;
 }
