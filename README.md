@@ -1,1 +1,2 @@
-The garply module
+The garply package.
+
