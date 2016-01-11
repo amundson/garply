@@ -2,9 +2,13 @@
 
 class Garply
 {
+private:
+    static const int version_major;
+    static const int version_minor;
+
 public:
-    static const int version;
     Garply();
+    int get_version() const;
     int garplinator() const;
 };
 

@@ -1,0 +1,2 @@
+const int garply_version_major = @GARPLY_VERSION_MAJOR@;
+const int garply_version_minor = @GARPLY_VERSION_MINOR@;

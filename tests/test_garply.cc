@@ -13,16 +13,16 @@ bool
 test_garplinator()
 {
     Garply garply;
-    return (garply.garplinator() == Garply::version);
+    return (garply.garplinator() == garply.get_version());
 }
 
 int
 main(int argc, char* argv[])
 {
-    if(!test_construct()) {
+    if (!test_construct()) {
         throw std::runtime_error("test_construct failed");
     }
-    if(!test_garplinator()) {
+    if (!test_garplinator()) {
         throw std::runtime_error("test_garplinator failed");
     }
 }
