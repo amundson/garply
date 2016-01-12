@@ -7,7 +7,7 @@ set(GARPLY_VERSION "${GARPLY_VERSION_MAJOR}.${GARPLY_VERSION_MINOR}")
 set(INCLUDE_INSTALL_DIR include/ CACHE PATH "install directory")
 set(LIB_INSTALL_DIR lib/ CACHE PATH "lib directory")
 
-include_directories(${GARPLY_SOURCE_DIR})
+include_directories(BEFORE ${GARPLY_SOURCE_DIR})
 enable_testing()
 
 include(CMakePackageConfigHelpers)
