@@ -11,10 +11,10 @@ test_construct()
 }
 
 bool
-test_garplinator()
+test_garplinate()
 {
     Garply garply;
-    return (garply.garplinator() == garply.get_version());
+    return (garply.garplinate() == garply.get_version());
 }
 }
 
@@ -24,8 +24,8 @@ main(int argc, char* argv[])
     if (!test_construct()) {
         throw std::runtime_error("test_construct failed");
     }
-    if (!test_garplinator()) {
-        throw std::runtime_error("test_garplinator failed");
+    if (!test_garplinate()) {
+        throw std::runtime_error("test_garplinate failed");
     }
 
     return 0;

@@ -16,9 +16,9 @@ Garply::get_version() const
 }
 
 int
-Garply::garplinator() const
+Garply::garplinate() const
 {
-    std::cout << "Garply::garplinator version " << get_version()
+    std::cout << "Garply::garplinate version " << get_version()
               << " invoked\n";
     return get_version();
 }

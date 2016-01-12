@@ -9,7 +9,7 @@ private:
 public:
     Garply();
     int get_version() const;
-    int garplinator() const;
+    int garplinate() const;
 };
 
 #endif // GARPLY_H_
