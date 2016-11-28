@@ -3,7 +3,6 @@ project(GARPLY VERSION 1.0.1)
 
 include(GNUInstallDirs)
 
-include_directories(BEFORE ${GARPLY_SOURCE_DIR})
 enable_testing()
 
 include(CMakePackageConfigHelpers)
