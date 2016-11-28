@@ -21,6 +21,9 @@ write_basic_package_version_file(
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/GarplyConfig.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/GarplyConfigVersion.cmake
               DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/garply)
+install(EXPORT GarplyTargets
+        NAMESPACE garply::
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/garply)
 
 add_subdirectory(garply)
 add_subdirectory(tests)

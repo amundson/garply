@@ -6,7 +6,9 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 add_library(garply SHARED garply.cc garply.h)
 
-install(TARGETS garply DESTINATION ${CMAKE_INSTALL_LIBDIR})
+install(TARGETS garply
+        EXPORT GarplyTargets
+        DESTINATION ${CMAKE_INSTALL_LIBDIR})
 install(FILES
         garply.h
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/garply)
