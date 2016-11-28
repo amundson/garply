@@ -7,8 +7,9 @@ add_library(garply SHARED garply.cc garply.h)
 target_include_directories(garply BEFORE
   PUBLIC
    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>
-   $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+  PRIVATE
+   $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
    )
 
 install(TARGETS garply
