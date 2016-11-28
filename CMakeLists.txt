@@ -1,32 +1,62 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(GARPLY)
-set(GARPLY_VERSION_MAJOR 1)
-set(GARPLY_VERSION_MINOR 0)
-set(GARPLY_VERSION_PATCH 1)
-set(GARPLY_VERSION 
-    "${GARPLY_VERSION_MAJOR}.${GARPLY_VERSION_MINOR}.${GARPLY_VERSION_PATCH}")
+project(GARPLY VERSION 1.0.1)
 
-set(INCLUDE_INSTALL_DIR include/ CACHE PATH "install directory")
-set(LIB_INSTALL_DIR lib/ CACHE PATH "lib directory")
+include(GNUInstallDirs)
 
-include_directories(BEFORE ${GARPLY_SOURCE_DIR})
 enable_testing()
+
+add_subdirectory(garply)
+add_subdirectory(tests)
 
 include(CMakePackageConfigHelpers)
 
-configure_package_config_file(GarplyConfig.cmake.in
-  ${CMAKE_CURRENT_BINARY_DIR}/GarplyConfig.cmake
-  INSTALL_DESTINATION ${LIB_INSTALL_DIR}/garply/cmake
-  PATH_VARS INCLUDE_INSTALL_DIR LIB_INSTALL_DIR)
-
+# - Versioning File (Same for Build/Install Trees)
 write_basic_package_version_file(
   ${CMAKE_CURRENT_BINARY_DIR}/GarplyConfigVersion.cmake
   VERSION ${GARPLY_VERSION}
   COMPATIBILITY ExactVersion)
 
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/GarplyConfig.cmake
-              ${CMAKE_CURRENT_BINARY_DIR}/GarplyConfigVersion.cmake
-        DESTINATION ${LIB_INSTALL_DIR}/garply/cmake)
+# - Build Tree Config/Targets files
+set(GARPLY_CURRENT_INCLUDEDIR "${PROJECT_SOURCE_DIR}")
+set(GARPLY_CURRENT_LIBDIR "${PROJECT_BINARY_DIR}/garply")
 
-add_subdirectory(garply)
-add_subdirectory(tests)
+configure_package_config_file(GarplyConfig.cmake.in
+  ${CMAKE_CURRENT_BINARY_DIR}/GarplyConfig.cmake
+  INSTALL_DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+  INSTALL_PREFIX ${CMAKE_CURRENT_BINARY_DIR}
+  PATH_VARS GARPLY_CURRENT_INCLUDEDIR GARPLY_CURRENT_LIBDIR)
+
+# NB: must be called *after* EXPORT argument is created, hence
+# move of add_subdirectory earlier.
+export(EXPORT GarplyTargets NAMESPACE garply::)
+
+# - Install Tree Config/Targets file
+set(GARPLY_CURRENT_INCLUDEDIR "${CMAKE_INSTALL_INCLUDEDIR}")
+set(GARPLY_CURRENT_LIBDIR "${CMAKE_INSTALL_LIBDIR}")
+
+configure_package_config_file(GarplyConfig.cmake.in
+  ${CMAKE_CURRENT_BINARY_DIR}/InstallTreeFiles/GarplyConfig.cmake
+  INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/garply/cmake
+  PATH_VARS GARPLY_CURRENT_INCLUDEDIR GARPLY_CURRENT_LIBDIR)
+
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/InstallTreeFiles/GarplyConfig.cmake
+              ${CMAKE_CURRENT_BINARY_DIR}/GarplyConfigVersion.cmake
+              DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/garply)
+install(EXPORT GarplyTargets
+        NAMESPACE garply::
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/garply)
+
+# - Uninstall target
+if (NOT TARGET uninstall)
+  configure_file(
+    "${CMAKE_CURRENT_LIST_DIR}/uninstall.cmake.in"
+    "${CMAKE_BINARY_DIR}/uninstall.cmake"
+    IMMEDIATE
+    @ONLY
+    )
+
+  add_custom_target(uninstall
+    COMMAND "${CMAKE_COMMAND}" -P "${CMAKE_BINARY_DIR}/uninstall.cmake"
+    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
+    )
+endif()
