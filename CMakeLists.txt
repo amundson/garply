@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(GARPLY VERSION 1.0.1)
+project(GARPLY VERSION 2.0.0)
 
 include(GNUInstallDirs)
 
