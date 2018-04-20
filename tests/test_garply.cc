@@ -16,7 +16,7 @@ test_garplinate()
     Garply garply;
     return (garply.garplinate() == garply.get_version());
 }
-}
+} // namespace
 
 int
 main(int argc, char* argv[])
